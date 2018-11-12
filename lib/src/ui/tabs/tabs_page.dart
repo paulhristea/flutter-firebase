@@ -2,25 +2,28 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/observer.dart';
 
 class TabsPage extends StatefulWidget {
-  TabsPage(this.observer);
+  TabsPage(this.observer, this.firebaseAnalytics);
 
   final FirebaseAnalyticsObserver observer;
+  final FirebaseAnalytics firebaseAnalytics;
 
   static const String routeName = '/tab';
 
   @override
-  State<StatefulWidget> createState() => _TabsPageState(observer);
+  State<StatefulWidget> createState() => _TabsPageState(observer, firebaseAnalytics);
 }
 
 class _TabsPageState extends State<TabsPage>
     with SingleTickerProviderStateMixin, RouteAware {
-  _TabsPageState(this.observer);
+  _TabsPageState(this.observer, this.firebaseAnalytics);
 
   final FirebaseAnalyticsObserver observer;
+  final FirebaseAnalytics firebaseAnalytics;
   TabController _controller;
   int selectedIndex = 0;
 
@@ -44,6 +47,7 @@ class _TabsPageState extends State<TabsPage>
   @override
   void initState() {
     super.initState();
+    throw UnimplementedError();
     _controller = TabController(
       vsync: this,
       length: tabs.length,
