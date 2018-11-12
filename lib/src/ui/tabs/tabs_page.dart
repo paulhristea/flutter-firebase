@@ -47,7 +47,6 @@ class _TabsPageState extends State<TabsPage>
   @override
   void initState() {
     super.initState();
-    throw UnimplementedError();
     _controller = TabController(
       vsync: this,
       length: tabs.length,
