@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
+import '../../domain/navigation/navigation_service.dart';
+import '../base/base_page.dart';
 import '../tabs/tabs_page.dart';
+import '../../config/constants.dart' as Constants;
 
-class HomePage extends StatefulWidget {
+class HomePage extends BasePage {
   HomePage({Key key, this.title, this.analytics, this.observer})
       : super(key: key);
 
@@ -14,21 +17,20 @@ class HomePage extends StatefulWidget {
   final FirebaseAnalyticsObserver observer;
 
   @override
-  _HomePageState createState() => _HomePageState(analytics, observer);
+  State createState() => _HomePageState(analytics, observer);
+
+  @override
+  String getRouteDescriptor() {
+    return Constants.homePageRoute;
+  }
 }
 
-class _HomePageState extends State<HomePage> {
-  _HomePageState(this.analytics, this.observer);
-
-  final FirebaseAnalyticsObserver observer;
-  final FirebaseAnalytics analytics;
+class _HomePageState extends BasePageState<HomePage> {
+  FirebaseAnalytics analytics;
+  FirebaseAnalyticsObserver observer;
   String _message = '';
 
-  void setMessage(String message) {
-    setState(() {
-      _message = message;
-    });
-  }
+  _HomePageState(this.analytics, this.observer);
 
   Future<void> _sendAnalyticsEvent() async {
     await analytics.logEvent(
@@ -41,12 +43,10 @@ class _HomePageState extends State<HomePage> {
         'bool': true,
       },
     );
-    setMessage('logEvent succeeded');
   }
 
   Future<void> _testSetUserId() async {
     await analytics.setUserId('some-user');
-    setMessage('setUserId succeeded');
   }
 
   Future<void> _testSetCurrentScreen() async {
@@ -54,28 +54,23 @@ class _HomePageState extends State<HomePage> {
       screenName: 'Analytics Demo',
       screenClassOverride: 'AnalyticsDemo',
     );
-    setMessage('setCurrentScreen succeeded');
   }
 
   Future<void> _testSetAnalyticsCollectionEnabled() async {
     await analytics.android?.setAnalyticsCollectionEnabled(false);
     await analytics.android?.setAnalyticsCollectionEnabled(true);
-    setMessage('setAnalyticsCollectionEnabled succeeded');
   }
 
   Future<void> _testSetMinimumSessionDuration() async {
     await analytics.android?.setMinimumSessionDuration(20000);
-    setMessage('setMinimumSessionDuration succeeded');
   }
 
   Future<void> _testSetSessionTimeoutDuration() async {
     await analytics.android?.setSessionTimeoutDuration(2000000);
-    setMessage('setSessionTimeoutDuration succeeded');
   }
 
   Future<void> _testSetUserProperty() async {
     await analytics.setUserProperty(name: 'regular', value: 'indeed');
-    setMessage('setUserProperty succeeded');
   }
 
   @override
@@ -121,11 +116,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.tab),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute<TabsPage>(
-                settings: const RouteSettings(name: TabsPage.routeName),
-                builder: (BuildContext context) {
-                  return TabsPage(observer, analytics);
-                }));
+            NavigationService(context).navigate(TabsPage(observer));
           }),
     );
   }

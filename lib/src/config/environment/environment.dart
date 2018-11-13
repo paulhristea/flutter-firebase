@@ -1,5 +1,5 @@
-import '../../exceptions/uninitialized_exception.dart';
-import '../../exceptions/missing_variable_exception.dart';
+import '../../domain/exceptions/uninitialized_exception.dart';
+import '../../domain/exceptions/missing_variable_exception.dart';
 import '../constants.dart' as Constants;
 
 class Environment {

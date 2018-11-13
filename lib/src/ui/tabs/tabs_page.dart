@@ -2,28 +2,30 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/observer.dart';
+import '../base/base_page.dart';
+import '../../config/constants.dart' as Constants;
 
-class TabsPage extends StatefulWidget {
-  TabsPage(this.observer, this.firebaseAnalytics);
+class TabsPage extends BasePage {
+  TabsPage(this.observer);
 
   final FirebaseAnalyticsObserver observer;
-  final FirebaseAnalytics firebaseAnalytics;
-
-  static const String routeName = '/tab';
 
   @override
-  State<StatefulWidget> createState() => _TabsPageState(observer, firebaseAnalytics);
+  State<StatefulWidget> createState() => _TabsPageState(observer);
+
+  @override
+  String getRouteDescriptor() {
+    return Constants.tabPageRoute;
+  }
 }
 
-class _TabsPageState extends State<TabsPage>
+class _TabsPageState extends BasePageState<TabsPage>
     with SingleTickerProviderStateMixin, RouteAware {
-  _TabsPageState(this.observer, this.firebaseAnalytics);
+  _TabsPageState(this.observer);
 
   final FirebaseAnalyticsObserver observer;
-  final FirebaseAnalytics firebaseAnalytics;
   TabController _controller;
   int selectedIndex = 0;
 
@@ -31,18 +33,6 @@ class _TabsPageState extends State<TabsPage>
     const Tab(text: 'LEFT'),
     const Tab(text: 'RIGHT'),
   ];
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    observer.subscribe(this, ModalRoute.of(context));
-  }
-
-  @override
-  void dispose() {
-    observer.unsubscribe(this);
-    super.dispose();
-  }
 
   @override
   void initState() {
@@ -60,6 +50,18 @@ class _TabsPageState extends State<TabsPage>
         }
       });
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    observer.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void dispose() {
+    observer.unsubscribe(this);
+    super.dispose();
   }
 
   @override
@@ -90,9 +92,14 @@ class _TabsPageState extends State<TabsPage>
     _sendCurrentTabToAnalytics();
   }
 
+  @override
+  void didPop() {
+    final x = 0;
+  }
+
   void _sendCurrentTabToAnalytics() {
     observer.analytics.setCurrentScreen(
-      screenName: '${TabsPage.routeName}/tab$selectedIndex',
+      screenName: '${widget.getRouteDescriptor()}/tab$selectedIndex',
     );
   }
 }
