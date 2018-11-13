@@ -20,11 +20,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  # Basic local storage
+  shared_preferences: ^0.4.3
+
   # Firebase Analytics
   firebase_analytics: ^1.0.5
 
   # Firebase Authentication
   firebase_auth: ^0.6.2+1
+  google_sign_in: ^3.2.4
 
   # Sentry
   sentry: ">=2.0.0 <3.0.0"

@@ -4,20 +4,28 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import '../../domain/navigation/navigation_service.dart';
+import '../../domain/auth/authentication_manager.dart';
 import '../base/base_page.dart';
 import '../tabs/tabs_page.dart';
 import '../../config/constants.dart' as Constants;
 
 class HomePage extends BasePage {
-  HomePage({Key key, this.title, this.analytics, this.observer})
+  HomePage(
+      {Key key,
+      this.title,
+      @required this.analytics,
+      @required this.observer,
+      @required this.authenticationManager})
       : super(key: key);
 
   final String title;
   final FirebaseAnalytics analytics;
   final FirebaseAnalyticsObserver observer;
+  final AuthenticationManager authenticationManager;
 
   @override
-  State createState() => _HomePageState(analytics, observer);
+  State createState() =>
+      _HomePageState(analytics, observer, authenticationManager);
 
   @override
   String getRouteDescriptor() {
@@ -28,9 +36,10 @@ class HomePage extends BasePage {
 class _HomePageState extends BasePageState<HomePage> {
   FirebaseAnalytics analytics;
   FirebaseAnalyticsObserver observer;
+  AuthenticationManager authenticationManager;
   String _message = '';
 
-  _HomePageState(this.analytics, this.observer);
+  _HomePageState(this.analytics, this.observer, this.authenticationManager);
 
   Future<void> _sendAnalyticsEvent() async {
     await analytics.logEvent(
@@ -108,6 +117,10 @@ class _HomePageState extends BasePageState<HomePage> {
           MaterialButton(
             child: const Text('Test setUserProperty'),
             onPressed: _testSetUserProperty,
+          ),
+          MaterialButton(
+            child: const Text('Logout'),
+            onPressed: authenticationManager.signOut,
           ),
           Text(_message,
               style: const TextStyle(color: Color.fromARGB(255, 0, 155, 0))),

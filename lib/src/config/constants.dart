@@ -1,5 +1,6 @@
-const String environmentFile = 'env.json';
-const String sentryDnsKey = 'SENTRY_DNS';
+const environmentFile = 'env.json';
+const sentryDnsKey = 'SENTRY_DNS';
 
-const String homePageRoute = '/home_page';
-const String tabPageRoute = '/tab_page';
+const loginPageRoute = '/login_page';
+const homePageRoute = '/home_page';
+const tabPageRoute = '/tab_page';
