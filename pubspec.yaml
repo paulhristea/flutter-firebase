@@ -23,6 +23,9 @@ dependencies:
   # Firebase Analytics
   firebase_analytics: ^1.0.5
 
+  # Firebase Authentication
+  firebase_auth: ^0.6.2+1
+
   # Sentry
   sentry: ">=2.0.0 <3.0.0"
 
