@@ -29,5 +29,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Android API 28 Platform" project-jdk-type="Android SDK" />
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
 </project>
