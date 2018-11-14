@@ -92,11 +92,6 @@ class _TabsPageState extends BasePageState<TabsPage>
     _sendCurrentTabToAnalytics();
   }
 
-  @override
-  void didPop() {
-    final x = 0;
-  }
-
   void _sendCurrentTabToAnalytics() {
     observer.analytics.setCurrentScreen(
       screenName: '${widget.getRouteDescriptor()}/tab$selectedIndex',
