@@ -18,6 +18,7 @@ class FlutterFirebaseApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      // TODO: Manually send screens to Firebase Analytics instead of their observer?
       navigatorObservers: <NavigatorObserver>[observer],
       home: _assertStartingPage(),
     );

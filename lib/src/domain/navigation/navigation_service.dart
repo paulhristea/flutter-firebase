@@ -23,4 +23,8 @@ class NavigationService {
       ),
     );
   }
+
+  void pop() {
+    Navigator.of(context).pop();
+  }
 }

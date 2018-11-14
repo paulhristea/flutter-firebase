@@ -12,3 +12,4 @@ env.json
 *.log
 *.iml
 .idea
+*.jar

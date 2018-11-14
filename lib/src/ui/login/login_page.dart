@@ -29,10 +29,21 @@ class _LoginPageState extends BasePageState<LoginPage> {
         title: Text('Login'),
       ),
       body: Center(
-        child: RaisedButton.icon(
-          icon: Icon(Icons.lock),
-          label: Text('Login'),
-          onPressed: authenticationManager.signInWithGoogle,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton.icon(
+              icon: Icon(Icons.lock),
+              label: Text('Login with Google'),
+              onPressed: authenticationManager.signInWithGoogle,
+            ),
+            RaisedButton.icon(
+              icon: Icon(Icons.lock),
+              label: Text('Login with Facebook'),
+              onPressed: () =>
+                  authenticationManager.signInWithFacebook(context),
+            ),
+          ],
         ),
       ),
     );
