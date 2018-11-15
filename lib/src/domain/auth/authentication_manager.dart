@@ -29,7 +29,7 @@ class AuthenticationManager {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    loggedInUser = new User()
+    loggedInUser = User()
       ..id = user.uid
       ..email = user.email;
   }
@@ -47,13 +47,16 @@ class AuthenticationManager {
         try {
           final FirebaseUser user =
               await _firebaseAuth.signInWithFacebook(accessToken: accessToken);
-          loggedInUser = new User()
+          loggedInUser = User()
             ..id = user.uid
             ..email = user.email;
         } catch (e) {
-          if (e.code == 'exception' &&
-              (e.message?.toString()?.contains('An account already exists') ??
-                  false)) {
+          if ((e.code == 'exception' || e.code == 'sign_in_failed') &&
+                  (e.message
+                          ?.toString()
+                          ?.contains('An account already exists') ??
+                      false) ||
+              e.message == 'FIRAuthErrorDomain') {
             showAlert(context, 'Account already exists',
                 'Please link with your existing account to continue.',
                 confirmButtonAction: () async {
