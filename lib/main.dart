@@ -3,6 +3,8 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:map_view/map_view.dart';
+import 'src/config/environment/environment.dart';
 import 'src/flutter_firebase_app.dart';
 import 'src/sentry/sentry_service.dart';
 import 'src/config/environment/environment_loader.dart';
@@ -15,6 +17,7 @@ void main() async {
 
 init() async {
   await EnvironmentLoader(Constants.environmentFile).load();
+  MapView.setApiKey(Environment().mapsApiKey);
   final developmentErrorHandler = FlutterError.onError;
   final productionErrorHandler = (FlutterErrorDetails errorDetails) {
     final exception = errorDetails.exception;

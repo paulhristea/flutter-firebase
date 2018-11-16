@@ -186,6 +186,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.11.3+2"
+  map_view:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "8b5968f92e66ae9c967be780d1c9746b1f73fdc3"
+      url: "git://github.com/paulhristea/flutter_google_map_view.git"
+    source: git
+    version: "0.0.14"
   matcher:
     dependency: transitive
     description:
@@ -380,6 +389,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  uri:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "04417bbc6b365cfd69a0009dfa4b358432f6e8bd"
+      url: "git://github.com/Eimji/uri.dart"
+    source: git
+    version: "0.11.3"
   usage:
     dependency: transitive
     description:

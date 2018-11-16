@@ -1,13 +1,13 @@
-import 'dart:async';
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
-import '../../domain/navigation/navigation_service.dart';
-import '../../domain/auth/authentication_manager.dart';
-import '../base/base_page.dart';
-import '../tabs/tabs_page.dart';
+
 import '../../config/constants.dart' as Constants;
+import '../../domain/auth/authentication_manager.dart';
+import '../../domain/navigation/navigation_service.dart';
+import '../base/base_page.dart';
+import '../map/map_page.dart';
+import '../tabs/tabs_page.dart';
 
 class HomePage extends BasePage {
   HomePage(
@@ -41,47 +41,6 @@ class _HomePageState extends BasePageState<HomePage> {
 
   _HomePageState(this.analytics, this.observer, this.authenticationManager);
 
-  Future<void> _sendAnalyticsEvent() async {
-    await analytics.logEvent(
-      name: 'test_event',
-      parameters: <String, dynamic>{
-        'string': 'string',
-        'int': 42,
-        'long': 12345678910,
-        'double': 42.0,
-        'bool': true,
-      },
-    );
-  }
-
-  Future<void> _testSetUserId() async {
-    await analytics.setUserId('some-user');
-  }
-
-  Future<void> _testSetCurrentScreen() async {
-    await analytics.setCurrentScreen(
-      screenName: 'Analytics Demo',
-      screenClassOverride: 'AnalyticsDemo',
-    );
-  }
-
-  Future<void> _testSetAnalyticsCollectionEnabled() async {
-    await analytics.android?.setAnalyticsCollectionEnabled(false);
-    await analytics.android?.setAnalyticsCollectionEnabled(true);
-  }
-
-  Future<void> _testSetMinimumSessionDuration() async {
-    await analytics.android?.setMinimumSessionDuration(20000);
-  }
-
-  Future<void> _testSetSessionTimeoutDuration() async {
-    await analytics.android?.setSessionTimeoutDuration(2000000);
-  }
-
-  Future<void> _testSetUserProperty() async {
-    await analytics.setUserProperty(name: 'regular', value: 'indeed');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,44 +49,23 @@ class _HomePageState extends BasePageState<HomePage> {
       ),
       body: Column(
         children: <Widget>[
-          MaterialButton(
-            child: const Text('Test logEvent'),
-            onPressed: _sendAnalyticsEvent,
+          RaisedButton.icon(
+            icon: Icon(Icons.map),
+            label: Text('Map Page'),
+            onPressed: () {
+              NavigationService(context).navigate(MapPage());
+            },
           ),
           MaterialButton(
-            child: const Text('Test setUserId'),
-            onPressed: _testSetUserId,
-          ),
-          MaterialButton(
-            child: const Text('Test setCurrentScreen'),
-            onPressed: _testSetCurrentScreen,
-          ),
-          MaterialButton(
-            child: const Text('Test setAnalyticsCollectionEnabled'),
-            onPressed: _testSetAnalyticsCollectionEnabled,
-          ),
-          MaterialButton(
-            child: const Text('Test setMinimumSessionDuration'),
-            onPressed: _testSetMinimumSessionDuration,
-          ),
-          MaterialButton(
-            child: const Text('Test setSessionTimeoutDuration'),
-            onPressed: _testSetSessionTimeoutDuration,
-          ),
-          MaterialButton(
-            child: const Text('Test setUserProperty'),
-            onPressed: _testSetUserProperty,
-          ),
-          MaterialButton(
-            child: const Text('Logout'),
+            child: Text('Logout'),
             onPressed: authenticationManager.signOut,
           ),
           Text(_message,
-              style: const TextStyle(color: Color.fromARGB(255, 0, 155, 0))),
+              style: TextStyle(color: Color.fromARGB(255, 0, 155, 0))),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.tab),
+          child: Icon(Icons.tab),
           onPressed: () {
             NavigationService(context).navigate(TabsPage(observer));
           }),

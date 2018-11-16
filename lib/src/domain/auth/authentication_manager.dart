@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +14,8 @@ class AuthenticationManager {
   final _googleSignIn = GoogleSignIn();
   final _firebaseAuth = FirebaseAuth.instance;
   final _facebookLogin = FacebookLogin();
+  final _analytics = FirebaseAnalytics();
+
   User loggedInUser;
 
   factory AuthenticationManager() {
@@ -29,6 +32,12 @@ class AuthenticationManager {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
+    onLoginSuccess(user);
+  }
+
+  void onLoginSuccess(FirebaseUser user) {
+    _analytics.setUserId(user.uid);
+    _analytics.logLogin();
     loggedInUser = User()
       ..id = user.uid
       ..email = user.email;
@@ -47,9 +56,7 @@ class AuthenticationManager {
         try {
           final FirebaseUser user =
               await _firebaseAuth.signInWithFacebook(accessToken: accessToken);
-          loggedInUser = User()
-            ..id = user.uid
-            ..email = user.email;
+          onLoginSuccess(user);
         } catch (e) {
           if ((e.code == 'exception' || e.code == 'sign_in_failed') &&
                   (e.message
@@ -103,6 +110,7 @@ class AuthenticationManager {
     await _firebaseAuth.signOut();
     await _googleSignIn.signOut();
     await _facebookLogin.logOut();
+    _analytics.setUserId(null);
   }
 
   bool isAuthenticated() {

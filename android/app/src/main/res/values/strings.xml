@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Flutter Firebase</string>
     <string name="facebook_app_id">2004691482925178</string>
+    <string name="maps_api_key">AIzaSyBlAAgxwtj815Gxa_O7S6q4NPCKQ3KKwcc</string>
 </resources>
