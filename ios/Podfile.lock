@@ -58,6 +58,11 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
+  - GoogleMaps (2.7.0):
+    - GoogleMaps/Maps (= 2.7.0)
+  - GoogleMaps/Base (2.7.0)
+  - GoogleMaps/Maps (2.7.0):
+    - GoogleMaps/Base
   - GoogleSignIn (4.3.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -96,6 +101,9 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
+  - map_view (0.0.12):
+    - Flutter
+    - GoogleMaps
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -110,6 +118,7 @@ DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_facebook_login (from `.symlinks/plugins/flutter_facebook_login/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
+  - map_view (from `.symlinks/plugins/map_view/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
 SPEC REPOS:
@@ -124,6 +133,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseInstanceID
     - GoogleAppMeasurement
+    - GoogleMaps
     - GoogleSignIn
     - GoogleToolboxForMac
     - GoogleUtilities
@@ -142,6 +152,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_facebook_login/ios"
   google_sign_in:
     :path: ".symlinks/plugins/google_sign_in/ios"
+  map_view:
+    :path: ".symlinks/plugins/map_view/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
@@ -161,14 +173,16 @@ SPEC CHECKSUMS:
   flutter_facebook_login: e3d2f0a348889fe0f49c302bc044b8cc66c691be
   google_sign_in: cbeb57b96679823d14df6b2240b629b983a42d79
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
+  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  map_view: 69cf0cfd53f816dea259755e523e5089a2efc0c5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
 
-PODFILE CHECKSUM: 7765ea4305eaab0b3dfd384c7de11902aa3195fd
+PODFILE CHECKSUM: 113d9269fd217c67e6f067763229b34dc88e69eb
 
 COCOAPODS: 1.5.3

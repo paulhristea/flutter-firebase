@@ -6,7 +6,8 @@ class Environment {
   static Environment _instance;
 
   final String sentryDns;
-  final String mapsApiKey;
+  final String serverMapsApiKey;
+  final String iosMapsApiKey;
 
   factory Environment([Map<String, dynamic> variables]) {
     if (_instance == null) {
@@ -22,8 +23,10 @@ class Environment {
   Environment._singleton(Map<String, dynamic> variables)
       : sentryDns = variables[Constants.sentryDnsEnv] ??
             throwMissingVariableException(Constants.sentryDnsEnv),
-        mapsApiKey = variables[Constants.mapsApiKeyEnv] ??
-            throwMissingVariableException(Constants.mapsApiKeyEnv);
+        serverMapsApiKey = variables[Constants.mapsApiKeyEnv] ??
+            throwMissingVariableException(Constants.mapsApiKeyEnv),
+        iosMapsApiKey = variables[Constants.iosApiKeyEnv] ??
+            throwMissingVariableException(Constants.iosApiKeyEnv);
 
   static throwMissingVariableException(String variableName) =>
       throw MissingVariableException(variableName);

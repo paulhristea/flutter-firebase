@@ -17,7 +17,7 @@ void main() async {
 
 init() async {
   await EnvironmentLoader(Constants.environmentFile).load();
-  MapView.setApiKey(Environment().mapsApiKey);
+  MapView.setApiKey(Environment().iosMapsApiKey);
   final developmentErrorHandler = FlutterError.onError;
   final productionErrorHandler = (FlutterErrorDetails errorDetails) {
     final exception = errorDetails.exception;

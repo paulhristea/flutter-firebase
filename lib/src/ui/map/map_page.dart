@@ -23,7 +23,7 @@ class _MapPageState extends BasePageState<MapPage> {
   MapView mapView = new MapView();
   CameraPosition cameraPosition;
   var compositeSubscription = new CompositeSubscription();
-  var staticMapProvider = new StaticMapProvider(Environment().mapsApiKey);
+  var staticMapProvider = new StaticMapProvider(Environment().serverMapsApiKey);
   Uri staticMapUri;
 
   //Marker bubble
@@ -35,11 +35,6 @@ class _MapPageState extends BasePageState<MapPage> {
       -122.66201455146073,
       color: Colors.blue,
       draggable: true, //Allows the user to move the marker.
-      markerIcon: new MarkerIcon(
-        "images/flower_vase.png",
-        width: 112.0,
-        height: 75.0,
-      ),
     ),
   ];
 
