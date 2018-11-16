@@ -189,7 +189,7 @@ class _MapPageState extends BasePageState<MapPage> {
             showCompassButton: true,
             initialCameraPosition: new CameraPosition(
                 new Location(45.526607443935724, -122.66731660813093), 15.0),
-            hideToolbar: true,
+            hideToolbar: false,
             title: "Recently Visited"),
         toolbarActions: [new ToolbarAction("Close", 1)]);
     StreamSubscription sub = mapView.onMapReady.listen((_) {
